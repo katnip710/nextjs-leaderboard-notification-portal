@@ -10,6 +10,7 @@ function MyApp({ Component, pageProps }) {
         <title>Leaderboard Notification Portal</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
+
       <ThemeProvider theme={theme}>
           <Component {...pageProps} />
       </ThemeProvider>
