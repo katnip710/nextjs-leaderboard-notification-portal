@@ -1,6 +1,7 @@
+//import { useEffect } from 'react';
 import { Box, Text, Button } from 'theme-ui';
 
-export default function Row({rank, name}) {
+export default function Row({}) {
 
     return (
         <div>
@@ -30,8 +31,6 @@ export default function Row({rank, name}) {
                 }}>Player</Text>
             </Box>
 
-
-
             <Box sx={{
                 display: "grid",
                 gridTemplateAreas: "'rank name button'",
@@ -47,14 +46,14 @@ export default function Row({rank, name}) {
                     display: "grid",
                     textAlign: "left",
                     color: 'black'
-                }}>{rank}</Text>
+                }}>rank</Text>
                 <Text sx={{
                     gridArea: "name",
                     fontSize: "1rem",
                     display: "grid",
                     textAlign: "left",
                     color: 'black'
-                }}>{name}</Text>
+                }}>name</Text>
                 <Button sx={{
                     gridArea: "button",
                     fontSize: "1rem",
