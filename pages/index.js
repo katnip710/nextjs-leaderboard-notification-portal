@@ -3,8 +3,6 @@ import Row from '../components/Row'
 
 export default function Home({ users }) {
 
-    console.log(users)
-
     return (
         <Box>
             {/*<a href="/api/auth/login">Login</a>*/}
@@ -39,8 +37,7 @@ export default function Home({ users }) {
             <Row
                 key= {user.id}
                 rank={user.rank}
-                name = {user.player.name}
-                score={user.score} />
+                name = {user.player.name} />
             ))}
         </Box>
     )
