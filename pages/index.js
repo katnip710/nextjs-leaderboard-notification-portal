@@ -57,7 +57,7 @@ export const getStaticProps = async () => {
     client.messages
     .create({
         body: 'Hello from TWILIO!',
-        to: '+2899280315', // Text this number
+        to: '+12899280315', // Text this number
         from: '+12163696199', // From a valid Twilio number
     })
     .then((message) => console.log(message.sid));

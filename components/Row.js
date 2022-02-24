@@ -1,6 +1,6 @@
 import { Box, Text, Button } from 'theme-ui';
 
-export default function Row({ id, rank, name }) {
+export default function Row({ id, rank, name, client }) {
 
     return (
         <div>
@@ -39,7 +39,7 @@ export default function Row({ id, rank, name }) {
                     cursor: 'pointer',
                     backgroundColor: 'red',
                     color: 'white'
-                }}>Notify</Button>
+                }} onClick={() => client.sendMessage()}>Notify</Button>
             </Box>
         </div>
     )
