@@ -1,23 +1,17 @@
-import { useRouter } from 'next/router';
 import { Box, Text, Button } from 'theme-ui';
 
-export default function Row({ data }) {
-
-    const router = useRouter();
-    if (router.isFallback) {
-        return <h1>Loading...</h1>;
-    }
+export default function Row({ id, rank, name }) {
 
     return (
         <div>
-            <Box sx={{
+            <Box key={id} sx={{
                 display: "grid",
                 gridTemplateAreas: "'rank name button'",
-                gridTemplateColumns: "10% 90%",
+                gridTemplateColumns: "10% 75% 15%",
                 width: "100%",
                 justifyContent: "center",
                 alignItems: "center",
-                backgroundColor: 'lightBlue',
+                backgroundColor: 'beige',
                 marginBottom: '1rem'
             }}>
                 <Text sx={{
@@ -26,40 +20,14 @@ export default function Row({ data }) {
                     display: "grid",
                     textAlign: "left",
                     color: 'black'
-                }}>#</Text>
+                }}>{rank}</Text>
                 <Text sx={{
                     gridArea: "name",
                     fontSize: "1rem",
                     display: "grid",
                     textAlign: "left",
                     color: 'black'
-                }}>Player</Text>
-            </Box>
-
-            {data?.length && data.map((item) => (
-            <Box key={item.res} sx={{
-                display: "grid",
-                gridTemplateAreas: "'rank name button'",
-                gridTemplateColumns: "10% 75% 15%",
-                width: "100%",
-                justifyContent: "center",
-                alignItems: "center",
-                backgroundColor: 'beige'
-            }}>
-                <Text sx={{
-                    gridArea: "rank",
-                    fontSize: "1rem",
-                    display: "grid",
-                    textAlign: "left",
-                    color: 'black'
-                }}>{item.rank}</Text>
-                <Text sx={{
-                    gridArea: "name",
-                    fontSize: "1rem",
-                    display: "grid",
-                    textAlign: "left",
-                    color: 'black'
-                }}>{item.name}</Text>
+                }}>{name}</Text>
                 <Button sx={{
                     gridArea: "button",
                     fontSize: "1rem",
@@ -73,19 +41,6 @@ export default function Row({ data }) {
                     color: 'white'
                 }}>Notify</Button>
             </Box>
-            ))}
         </div>
     )
-}
-
-
-export async function getStaticProps() {
-    const leaderboard = await fetch("api/hello")
-    const res = await leaderboard.json()
-
-    return {
-        props: {
-            data: res
-        }
-    }
 }
