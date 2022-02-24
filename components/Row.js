@@ -1,7 +1,12 @@
-//import { useEffect } from 'react';
+import { useRouter } from 'next/router';
 import { Box, Text, Button } from 'theme-ui';
 
-export default function Row({}) {
+export default function Row({ data }) {
+
+    const router = useRouter();
+    if (router.isFallback) {
+        return <h1>Loading...</h1>;
+    }
 
     return (
         <div>
@@ -31,7 +36,8 @@ export default function Row({}) {
                 }}>Player</Text>
             </Box>
 
-            <Box sx={{
+            {data?.length && data.map((item) => (
+            <Box key={item.res} sx={{
                 display: "grid",
                 gridTemplateAreas: "'rank name button'",
                 gridTemplateColumns: "10% 75% 15%",
@@ -46,14 +52,14 @@ export default function Row({}) {
                     display: "grid",
                     textAlign: "left",
                     color: 'black'
-                }}>rank</Text>
+                }}>{item.rank}</Text>
                 <Text sx={{
                     gridArea: "name",
                     fontSize: "1rem",
                     display: "grid",
                     textAlign: "left",
                     color: 'black'
-                }}>name</Text>
+                }}>{item.name}</Text>
                 <Button sx={{
                     gridArea: "button",
                     fontSize: "1rem",
@@ -67,6 +73,19 @@ export default function Row({}) {
                     color: 'white'
                 }}>Notify</Button>
             </Box>
+            ))}
         </div>
     )
+}
+
+
+export async function getStaticProps() {
+    const leaderboard = await fetch("api/hello")
+    const res = await leaderboard.json()
+
+    return {
+        props: {
+            data: res
+        }
+    }
 }
