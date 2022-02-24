@@ -1,9 +1,8 @@
 import { Box, Text } from 'theme-ui';
 import Row from '../components/Row'
 
-export default function Home({ users }) {
 
-    console.log(users)
+export default function Home({ users }) {
 
     return (
         <Box>
@@ -39,8 +38,7 @@ export default function Home({ users }) {
             <Row
                 key= {user.id}
                 rank={user.rank}
-                name = {user.player.name}
-                score={user.score} />
+                name = {user.player.name} />
             ))}
         </Box>
     )
