@@ -1,6 +1,17 @@
 import { Box, Text, Button } from 'theme-ui';
 
-export default function Row({ id, rank, name, client }) {
+export default function Row({ id, rank, name }) {
+
+    const handleClick = async () => {
+        console.log(id)
+
+        const res = await fetch('/api/twilio', {
+            method:"POST",
+            body: JSON.stringify({userId: id})
+        })
+        const data =  await res.json()
+        console.log(data)
+    }
 
     return (
         <div>
@@ -39,7 +50,7 @@ export default function Row({ id, rank, name, client }) {
                     cursor: 'pointer',
                     backgroundColor: 'red',
                     color: 'white'
-                }} onClick={() => client.sendMessage()}>Notify</Button>
+                }} onClick={handleClick}>Notify</Button>
             </Box>
         </div>
     )
