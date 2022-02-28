@@ -10,8 +10,8 @@ export default function Home({ users }) {
 
             <Box sx={{
                 display: "grid",
-                gridTemplateAreas: "'rank name button'",
-                gridTemplateColumns: "10% 90%",
+                gridTemplateAreas: "'rank name score'",
+                gridTemplateColumns: "10% 40% 50%",
                 width: "100%",
                 justifyContent: "center",
                 alignItems: "center",
@@ -32,6 +32,13 @@ export default function Home({ users }) {
                     textAlign: "left",
                     color: 'black'
                 }}>Player</Text>
+                <Text sx={{
+                    gridArea: "score",
+                    fontSize: "1rem",
+                    display: "grid",
+                    textAlign: "left",
+                    color: 'black'
+                }}>Score</Text>
             </Box>
 
             {users.map(user => (
@@ -39,7 +46,8 @@ export default function Home({ users }) {
                 key= {user.id}
                 id={user.id}
                 rank={user.rank}
-                name = {user.player.name} />
+                name = {user.player.name}
+                score={user.score} />
             ))}
         </Box>
     )
