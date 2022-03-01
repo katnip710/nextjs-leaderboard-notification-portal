@@ -8,7 +8,7 @@ export default function Row({ id, rank, name, score }) {
 
         const res = await fetch('/api/twilio', {
             method:"POST",
-            body: JSON.stringify({userId: id})
+            body: JSON.stringify({playerId: id})
         })
         const data =  await res.json()
         console.log(data)

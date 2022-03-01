@@ -44,7 +44,7 @@ export default function Home({ users }) {
             {users.map(user => (
             <Row
                 key= {user.id}
-                id={user.id}
+                id={user.player.id}
                 rank={user.rank}
                 name = {user.player.name}
                 score={user.score} />
