@@ -1,12 +1,28 @@
 import { Box, Text } from 'theme-ui'
 import Row from '../components/Row'
+import { useUser } from '@auth0/nextjs-auth0';
+import React from 'react';
 
 
 export default function Home({ users }) {
 
+    const { user, error, isLoading } = useUser();
+
+    if (isLoading) return <div>Loading...</div>;
+    if (error) return <div>{error.message}</div>;
+
     return (
         <Box>
-            {/*<a href="/api/auth/login">Login</a>*/}
+            <a href="/api/auth/login">Login</a>
+            <a href="/api/auth/logout">Logout</a>
+
+            {user && (
+                <Box>
+                    <img src={user.picture} alt={user.name} />
+                    <Text>{user.name}</Text>
+                    <Text>{user.email}</Text>
+                </Box>
+            )}
 
             <Box sx={{
                 display: "grid",

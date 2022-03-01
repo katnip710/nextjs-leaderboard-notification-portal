@@ -6,11 +6,6 @@ export default async function handler (req, res) {
         return res.status(405).json({ error: "method not supported" })
     }
 
-    //TODO: pull user info in from scorebot
-
-    // fetch request to scorebot with the id in req.body.playerId
-    //player.data.phone
-
     try {
         const accountSid = process.env.TWILIO_ACCT_SID;
         const authToken = process.env.TWILIO_AUTH_TOKEN;
@@ -19,7 +14,6 @@ export default async function handler (req, res) {
         const { playerId } = JSON.parse (req.body)
         const playerReq = await fetch(`https://scorebot-api-service-q3nu3.ondigitalocean.app/v1/players/${playerId}`)
         const playerInfo = await playerReq.json()
-        console.log(playerInfo)
 
         const message = await client.messages.create({
             body: 'Hello from TWILIO!',

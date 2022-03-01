@@ -2,6 +2,7 @@ import '../styles/globals.css'
 import { ThemeProvider } from "theme-ui"
 import theme from "../theme"
 import Head from 'next/head'
+import { UserProvider } from '@auth0/nextjs-auth0';
 
 function MyApp({ Component, pageProps }) {
   return (
@@ -11,9 +12,11 @@ function MyApp({ Component, pageProps }) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <ThemeProvider theme={theme}>
-          <Component {...pageProps} />
-      </ThemeProvider>
+      <UserProvider>
+        <ThemeProvider theme={theme}>
+            <Component {...pageProps} />
+        </ThemeProvider>
+      </UserProvider>
     </>
   )
 }
