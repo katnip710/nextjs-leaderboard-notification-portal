@@ -1,6 +1,7 @@
 import twilio from "twilio"
+import { withApiAithRequired } from "@auth0/nextjs-auth0"
 
-export default async function handler (req, res) {
+export default withApiAuthRequired(async function handler (req, res) {
 
     if (req.method !== "POST") {
         return res.status(405).json({ error: "method not supported" })
@@ -27,4 +28,4 @@ export default async function handler (req, res) {
         console.error(error)
         return res.json({ message: "Oops, that didn't work..." })
     }
-}
+})

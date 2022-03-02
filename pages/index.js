@@ -1,10 +1,10 @@
 import { Box, Text } from 'theme-ui'
 import Row from '../components/Row'
-import { useUser } from '@auth0/nextjs-auth0';
+import { useUser, withPageAuthRequired } from '@auth0/nextjs-auth0';
 import React from 'react';
 
 
-export default function Home({ users }) {
+export default withPageAuthRequired(function Home({ users }) {
 
     const { user, error, isLoading } = useUser();
 
@@ -67,7 +67,7 @@ export default function Home({ users }) {
             ))}
         </Box>
     )
-}
+})
 
 
 

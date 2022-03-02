@@ -7,12 +7,11 @@ import { UserProvider } from '@auth0/nextjs-auth0';
 function MyApp({ Component, pageProps }) {
   return (
     <>
+      <UserProvider>
       <Head>
         <title>Leaderboard Notification Portal</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-
-      <UserProvider>
         <ThemeProvider theme={theme}>
             <Component {...pageProps} />
         </ThemeProvider>
