@@ -1,4 +1,4 @@
-import { Box, Text } from 'theme-ui'
+import { Box, Text, Image } from 'theme-ui'
 import Row from '../components/Row'
 import { useUser, withPageAuthRequired } from '@auth0/nextjs-auth0';
 import React from 'react';
@@ -18,7 +18,9 @@ export default withPageAuthRequired(function Home({ users }) {
 
             {user && (
                 <Box>
-                    <img src={user.picture} alt={user.name} />
+                    <Image src={user.picture} alt={user.name} sx={{
+                        width: '50px'
+                    }} />
                     <Text>{user.name}</Text>
                     <Text>{user.email}</Text>
                 </Box>

@@ -1,7 +1,19 @@
 import twilio from "twilio"
-import { withApiAithRequired } from "@auth0/nextjs-auth0"
+//import { withApiAithRequired } from "@auth0/nextjs-auth0"
+import { initializeApp } from "firebase/app";
 
-export default withApiAuthRequired(async function handler (req, res) {
+export default async function handler (req, res) {
+
+    const firebaseConfig = {
+        apiKey: "AIzaSyCjuzCSx08_sxU5YjAM1AHXEikr5_iTOE8",
+        authDomain: "notification-portal-1fffd.firebaseapp.com",
+        projectId: "notification-portal-1fffd",
+        storageBucket: "notification-portal-1fffd.appspot.com",
+        messagingSenderId: "641237295244",
+        appId: "1:641237295244:web:b72cf48e9e4c2f7da79ba9"
+    };
+
+    const app = initializeApp(firebaseConfig);
 
     if (req.method !== "POST") {
         return res.status(405).json({ error: "method not supported" })
@@ -28,4 +40,4 @@ export default withApiAuthRequired(async function handler (req, res) {
         console.error(error)
         return res.json({ message: "Oops, that didn't work..." })
     }
-})
+}
