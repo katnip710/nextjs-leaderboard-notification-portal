@@ -61,7 +61,7 @@ export default function Row({ id, rank, name, score }) {
                     textAlign: "left",
                     color: 'black',
                     cursor: 'pointer',
-                    backgroundColor: 'red',
+                    backgroundColor: ! isSent ? "red" : "grey",
                     color: 'white'
                 }} onClick={handleClick} disabled={isSent}>Notify</Button>
             </Box>
