@@ -36,7 +36,7 @@ async function sendTwilio(playerId){
         const authToken = process.env.TWILIO_AUTH_TOKEN;
         const client = new twilio(accountSid, authToken);
 
-        const { playerId } = JSON.parse (req.body)
+        //const { playerId } = JSON.parse (req.body)
         const playerReq = await fetch(`https://scorebot-api-service-q3nu3.ondigitalocean.app/v1/players/${playerId}`)
         const playerInfo = await playerReq.json()
 
