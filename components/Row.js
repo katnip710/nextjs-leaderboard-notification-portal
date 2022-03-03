@@ -1,10 +1,14 @@
 import { Box, Text, Button } from 'theme-ui';
+import { useState } from 'react'
 
 export default function Row({ id, rank, name, score }) {
+
+    const [isSent, setSent] = useState(false)
 
     const handleClick = async () => {
         console.log(id)
         console.log(name)
+        setSent(true)
 
         const res = await fetch('/api/twilio', {
             method:"POST",
@@ -12,6 +16,7 @@ export default function Row({ id, rank, name, score }) {
         })
         const data =  await res.json()
         console.log(data)
+        setSent(false)
     }
 
     return (
@@ -58,7 +63,7 @@ export default function Row({ id, rank, name, score }) {
                     cursor: 'pointer',
                     backgroundColor: 'red',
                     color: 'white'
-                }} onClick={handleClick}>Notify</Button>
+                }} onClick={handleClick} disabled={isSent}>Notify</Button>
             </Box>
         </div>
     )
