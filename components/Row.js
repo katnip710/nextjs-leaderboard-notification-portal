@@ -4,11 +4,12 @@ import { useState } from 'react'
 export default function Row({ id, rank, name, score }) {
 
     const [isSent, setSent] = useState(false)
+    const [isLoading, setLoading] = useState(false)
 
     const handleClick = async () => {
         console.log(id)
         console.log(name)
-        setSent(true)
+        setLoading(true)
 
         const res = await fetch('/api/twilio', {
             method:"POST",
@@ -16,7 +17,8 @@ export default function Row({ id, rank, name, score }) {
         })
         const data =  await res.json()
         console.log(data)
-        setSent(false)
+        setSent(true)
+        setLoading(false)
     }
 
     return (
@@ -63,7 +65,15 @@ export default function Row({ id, rank, name, score }) {
                     cursor: 'pointer',
                     backgroundColor: ! isSent ? "red" : "grey",
                     color: 'white'
-                }} onClick={handleClick} disabled={isSent}>Notify</Button>
+                }} onClick={handleClick} disabled={isSent || isLoading}>
+                {isLoading
+                    ? <Text>Sending...</Text>
+                    : <div>
+                    {isSent ? <Text>Sent</Text>
+                    : <Text>Notify</Text>
+                    }</div>
+                }
+                </Button>
             </Box>
         </div>
     )

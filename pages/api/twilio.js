@@ -1,6 +1,6 @@
 import twilio from "twilio"
 import { initializeApp } from "firebase/app";
-import { getFirestore, collection, onSnapshot, addDoc, deleteDoc, doc, query, where, setDoc, orderBy, serverTimestamp, updateDoc } from "firebase/firestore";
+import { getFirestore, collection, onSnapshot, addDoc, deleteDoc, doc, query, where, setDoc, getDoc, orderBy, serverTimestamp, updateDoc } from "firebase/firestore";
 
 
 const firebaseConfig = {
@@ -19,6 +19,7 @@ const db = getFirestore();
 export default async function handler (req, res) {
     if (req.method === "POST") {
         const { playerId } = JSON.parse (req.body)
+        const firestoreCheck = await checkFirestore(playerId)
         const twilioResp = await sendTwilio(playerId)
         const firestoreResp = await updateFirestore(playerId)
         res.status(200).json({status: "This works"})
@@ -63,7 +64,15 @@ async function updateFirestore(playerId){
     return {status: "sent!"}
 }
 
-async function getFirestoreDocs(){
-    const snapshot = await getDocs(doc(db, "leaderboard"))
-    console.log(snapshot.data())
+async function checkFirestore(playerId){
+    const docRef = doc(db, "leaderboard", playerId);
+    const docSnap = await getDoc(docRef);
+
+    if (docSnap.exists()) {
+        console.log("Doc Data:", docSnap.data());
+        //stopPropagation()
+
+    } else {
+        console.log("Document doesn't exsist");
+    }
 }
