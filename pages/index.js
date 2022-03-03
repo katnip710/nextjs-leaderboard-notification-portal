@@ -1,63 +1,18 @@
-import { Box, Text, Image } from 'theme-ui'
+import { Box } from 'theme-ui'
 import Row from '../components/Row'
-import { useUser, withPageAuthRequired } from '@auth0/nextjs-auth0';
+import { withPageAuthRequired } from '@auth0/nextjs-auth0';
 import React from 'react';
+import Profile from '../components/Profile';
+import Title from '../components/Title';
 
 
 export default withPageAuthRequired(function Home({ users }) {
 
-    const { user, error, isLoading } = useUser();
-
-    if (isLoading) return <div>Loading...</div>;
-    if (error) return <div>{error.message}</div>;
-
     return (
         <Box>
-            <a href="/api/auth/login">Login</a>
-            <a href="/api/auth/logout">Logout</a>
+            <Profile />
 
-            {user && (
-                <Box>
-                    <Image src={user.picture} alt={user.name} sx={{
-                        width: '50px'
-                    }} />
-                    <Text>{user.name}</Text>
-                    <Text>{user.email}</Text>
-                </Box>
-            )}
-
-            <Box sx={{
-                display: "grid",
-                gridTemplateAreas: "'rank name score'",
-                gridTemplateColumns: "10% 40% 50%",
-                width: "100%",
-                justifyContent: "center",
-                alignItems: "center",
-                backgroundColor: 'lightBlue',
-                marginBottom: '1rem'
-            }}>
-                <Text sx={{
-                    gridArea: "rank",
-                    fontSize: "1rem",
-                    display: "grid",
-                    textAlign: "left",
-                    color: 'black'
-                }}>#</Text>
-                <Text sx={{
-                    gridArea: "name",
-                    fontSize: "1rem",
-                    display: "grid",
-                    textAlign: "left",
-                    color: 'black'
-                }}>Player</Text>
-                <Text sx={{
-                    gridArea: "score",
-                    fontSize: "1rem",
-                    display: "grid",
-                    textAlign: "left",
-                    color: 'black'
-                }}>Score</Text>
-            </Box>
+            <Title />
 
             {users.map(user => (
             <Row
