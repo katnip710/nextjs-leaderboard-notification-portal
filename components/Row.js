@@ -30,9 +30,11 @@ export default function Row({ id, rank, name, score }) {
                 width: "100%",
                 justifyContent: "center",
                 alignItems: "center",
-                marginBottom: '1rem',
-                padding: '0.6rem 1rem',
-                borderBottom: 'solid hsla(34, 27%, 4%, 0.2) 0.5px'
+                padding: '0.6rem 2rem',
+                borderBottom: 'solid hsla(34, 27%, 4%, 0.1) 0.5px',
+                fontFamily: 'sans-serif',
+                fontWeight: '600',
+                fontSize: '.9rem',
             }}>
                 <Text sx={{
                     gridArea: "rank",
@@ -65,8 +67,13 @@ export default function Row({ id, rank, name, score }) {
                     textAlign: "left",
                     color: 'black',
                     cursor: 'pointer',
-                    backgroundColor: ! isSent ? "red" : "grey",
-                    color: 'white'
+                    backgroundColor: ! isSent ? "lightBlue" : "hsla(34, 27%, 4%, 0.5)",
+                    color: ! isSent ? 'black' : 'white',
+                    fontFamily: 'sans-serif',
+                    fontWeight: '600',
+                    fontSize: '1rem',
+                    borderRadius: '10px',
+                    boxShadow: '3px 3px 5px hsla(34, 27%, 4%, 0.5)',
                 }} onClick={handleClick} disabled={isSent || isLoading}>
                 {isLoading
                     ? <Text>Sending...</Text>
