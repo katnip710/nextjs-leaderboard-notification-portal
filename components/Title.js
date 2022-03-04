@@ -13,7 +13,8 @@ export default function Title() {
             justifyContent: "center",
             alignItems: "center",
             backgroundColor: 'lightBlue',
-            marginBottom: '1rem'
+            borderRadius: '20px 20px 0 0',
+            padding: '0.6rem 1rem',
         }}>
             <Text sx={{
                 gridArea: "rank",

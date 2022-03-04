@@ -11,19 +11,39 @@ export default function Profile() {
     if (error) return <div>{error.message}</div>;
 
     return (
-        <Box>
-            <a href="/api/auth/login">Login</a>
-            <a href="/api/auth/logout">Logout</a>
-
+        <Box sx={{
+            width: '100%',
+            height: 'auto',
+            backgroundColor: '#f8f5f2',
+            fontFamily: 'sans-serif',
+            fontWeight: '600',
+            fontSize: '.9rem',
+            display: 'flex',
+            flexDirection: 'row',
+            justifyContent: 'space-between'
+        }}>
             {user && (
-                <Box>
+                <Box sx={{
+                    padding: '1rem',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    justifyContent: 'flex-start'
+                }}>
                     <Image src={user.picture} alt={user.name} sx={{
-                        width: '50px'
+                        width: '50px',
+                        marginBottom: '.5rem',
+                        borderRadius: '50px',
+                        boxShadow: '4px 4px 10px grey'
                     }} />
-                    <Text>{user.name}</Text>
-                    <Text>{user.email}</Text>
+                    <Text>Welcome {user.name}!</Text>
                 </Box>
             )}
+
+            <Box sx={{
+                padding: '1rem',
+            }}>
+                <a href="/api/auth/logout">Logout</a>
+            </Box>
         </Box>
     )
 }

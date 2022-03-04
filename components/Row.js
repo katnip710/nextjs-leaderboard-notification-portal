@@ -30,15 +30,17 @@ export default function Row({ id, rank, name, score }) {
                 width: "100%",
                 justifyContent: "center",
                 alignItems: "center",
-                backgroundColor: 'beige',
-                marginBottom: '1rem'
+                marginBottom: '1rem',
+                padding: '0.6rem 1rem',
+                borderBottom: 'solid hsla(34, 27%, 4%, 0.2) 0.5px'
             }}>
                 <Text sx={{
                     gridArea: "rank",
                     fontSize: "1rem",
                     display: "grid",
                     textAlign: "left",
-                    color: 'black'
+                    color: 'black',
+                    width: "100%",
                 }}>{rank}</Text>
                 <Text sx={{
                     gridArea: "name",
