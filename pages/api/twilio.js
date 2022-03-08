@@ -1,6 +1,6 @@
 import twilio from "twilio"
 import { initializeApp } from "firebase/app";
-import { getFirestore, collection, onSnapshot, addDoc, deleteDoc, doc, query, where, setDoc, getDoc, orderBy, serverTimestamp, updateDoc } from "firebase/firestore";
+import { getFirestore, doc, setDoc, getDoc } from "firebase/firestore";
 
 
 const firebaseConfig = {
@@ -19,15 +19,30 @@ const db = getFirestore();
 export default async function handler (req, res) {
     if (req.method === "POST") {
         const { playerId } = JSON.parse (req.body)
+
         const firestoreCheck = await checkFirestore(playerId)
-        const twilioResp = await sendTwilio(playerId)
         const firestoreResp = await updateFirestore(playerId)
+        const twilioResp = await sendTwilio(playerId)
+
         res.status(200).json({status: "This works"})
     }
         else if (req.method ==="GET"){
-    }
-    else{
+
+    } else{
         return res.status(405).json({ error: "Method not supported" })
+    }
+}
+
+export async function checkFirestore(playerId){
+    const docRef = doc(db, "leaderboard", playerId);
+    const docSnap = await getDoc(docRef);
+
+    if (docSnap.exists()) {
+        console.log("Already sent!");
+        exit()
+
+    } else {
+        console.log("No such document exsists!");
     }
 }
 
@@ -57,22 +72,11 @@ async function sendTwilio(playerId){
 async function updateFirestore(playerId){
     const ref = setDoc(doc(db, "leaderboard", playerId), {
         id: playerId,
-        notified: new Date()
+        notified: new Date(),
+        textSent: true
     })
         console.log("This Workss")
         console.log(ref)
+
     return {status: "sent!"}
-}
-
-async function checkFirestore(playerId){
-    const docRef = doc(db, "leaderboard", playerId);
-    const docSnap = await getDoc(docRef);
-
-    if (docSnap.exists()) {
-        console.log("Doc Data:", docSnap.data());
-        //stopPropagation()
-
-    } else {
-        console.log("Document doesn't exsist");
-    }
 }

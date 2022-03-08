@@ -112,3 +112,7 @@ label {
 button:hover:enabled {
   background-color: rgba(173, 216, 230, 0.568);
 }
+
+button:hover:disabled {
+  cursor: not-allowed;
+}

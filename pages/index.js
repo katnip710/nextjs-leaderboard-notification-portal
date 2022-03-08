@@ -29,26 +29,14 @@ export default withPageAuthRequired(function Home({ users }) {
 
                 {users.map(user => (
                 <Row
-                    key= {user.id}
+                    key={user.id}
                     id={user.player.id}
                     rank={user.rank}
-                    name = {user.player.name}
-                    score={user.score} />
+                    name={user.player.name}
+                    score={user.score}
+                    sent={user.textSent} />
                 ))}
             </Box>
         </Box>
     )
 })
-
-
-
-export const getStaticProps = async () => {
-    const leaderboard = await fetch("https://scorebot-api-service-q3nu3.ondigitalocean.app/v1/leaderboards/PP3SPA6hmE89dX-ZLq-s9/entries?page=1&size=50");
-    const data = await leaderboard.json()
-
-    return {
-        props: {
-            users: data.items
-        }
-    }
-}

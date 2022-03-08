@@ -1,9 +1,9 @@
 import { Box, Text, Button } from 'theme-ui';
 import { useState } from 'react'
 
-export default function Row({ id, rank, name, score }) {
+export default function Row({ id, rank, name, score, sent }) {
 
-    const [isSent, setSent] = useState(false)
+    const [isSent, setSent] = useState(sent)
     const [isLoading, setLoading] = useState(false)
 
     const handleClick = async () => {
